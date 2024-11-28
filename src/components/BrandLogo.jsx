@@ -24,7 +24,12 @@ const LogoImage = styled.img`
 `;
 
 function BrandLogo() {
-  return <LogoImage src="/images/logo.png" alt="K.Dot Cafe Logo" />;
+  return (
+    <LogoImage
+      src={`${process.env.PUBLIC_URL}/images/logo.png`}
+      alt="K.Dot Cafe Logo"
+    />
+  );
 }
 
 export default BrandLogo;

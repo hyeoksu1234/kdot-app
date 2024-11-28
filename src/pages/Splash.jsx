@@ -43,7 +43,7 @@ function Splash({ onSplashComplete }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onSplashComplete();
-    }, 2000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [onSplashComplete]);

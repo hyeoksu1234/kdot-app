@@ -1,14 +1,13 @@
 {
-  "name": "kdot-cafe-app",
+  "name": "your-app-name",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://hyeoksu1234.github.io/Kdot_app2",
+  "homepage": "https://hyeoksu1234.github.io/home",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.8",
-    "gh-pages": "^6.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.3.0",
@@ -47,5 +46,8 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
+  }
 }

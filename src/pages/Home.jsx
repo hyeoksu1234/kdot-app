@@ -17,7 +17,7 @@ const fadeIn = keyframes`
 const HomeContainer = styled.div`
   min-height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url("/images/background/traditional-tea.jpg");
+    url(${process.env.PUBLIC_URL}/images/background/traditional-tea.jpg);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -25,7 +25,6 @@ const HomeContainer = styled.div`
 `;
 
 const HeroSection = styled.section`
-  
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   margin-right: calc(-50vw + 50%);
@@ -192,7 +191,10 @@ function Home() {
         <SectionTitle>진행중인 이벤트</SectionTitle>
         <EventGrid>
           <EventCard>
-            <img src="/images/events/summer-special.jpg" alt="여름 시즌 메뉴" />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/events/summer-special.jpg`}
+              alt="여름 시즌 메뉴"
+            />
             <div className="content">
               <h3>여름 시즌 한정 메뉴</h3>
               <p>시원한 수박화채와 함께하는 무더운 여름</p>
@@ -200,7 +202,10 @@ function Home() {
             </div>
           </EventCard>
           <EventCard>
-            <img src="/images/events/membership.jpg" alt="멤버십 혜택" />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/events/membership.jpg`}
+              alt="멤버십 혜택"
+            />
             <div className="content">
               <h3>K.Dot 멤버십 런칭</h3>
               <p>회원가입시 음료 무료 쿠폰 증정</p>
@@ -214,14 +219,20 @@ function Home() {
         <SectionTitle>이 달의 추천 메뉴</SectionTitle>
         <EventGrid>
           <EventCard>
-            <img src="/images/menu/signature1.jpg" alt="시그니처 메뉴" />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/menu/signature1.jpg`}
+              alt="시그니처 메뉴"
+            />
             <div className="content">
               <h3>치즈 웨이브 수정과</h3>
               <p>부드러운 치즈폼과 전통 수정과의 달콤한 조화</p>
             </div>
           </EventCard>
           <EventCard>
-            <img src="/images/menu/signature2.jpg" alt="시그니처 메뉴" />
+            <img
+              src={`${process.env.PUBLIC_URL}/images/menu/signature2.jpg`}
+              alt="시그니처 메뉴"
+            />
             <div className="content">
               <h3>오미자 샴페인 스플래쉬</h3>
               <p>오미자의 오묘한 맛과 탄산의 상쾌함</p>

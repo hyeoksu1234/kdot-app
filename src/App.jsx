@@ -37,31 +37,22 @@ function App() {
     } else {
       setIsFirstVisit(false);
     }
-
-    // 페이지 새로고침 시 localStorage 초기화
-    window.addEventListener("beforeunload", () => {
-      localStorage.removeItem("hasVisited");
-    });
-
-    return () => {
-      window.removeEventListener("beforeunload", () => {
-        localStorage.removeItem("hasVisited");
-      });
-    };
   }, []);
 
   if (isFirstVisit) {
     return (
-      <Splash
-        onSplashComplete={() => {
-          setIsFirstVisit(false);
-        }}
-      />
+      <Router basename="/home">
+        <Splash
+          onSplashComplete={() => {
+            setIsFirstVisit(false);
+          }}
+        />
+      </Router>
     );
   }
 
   return (
-    <Router>
+    <Router basename="/home">
       <CartProvider>
         <AppContainer>
           <Header />
