@@ -117,7 +117,7 @@ function Cart() {
       <h1>장바구니</h1>
       {cartItems.map((item, index) => (
         <CartItem key={index}>
-          <ItemImage src={`${process.env.PUBLIC_URL}${item.image}`} alt={item.name} />
+          <ItemImage src={`${process.env.PUBLIC_URL}/images/menu/${item.image.split('/').pop()}`} alt={item.name} />
           <ItemInfo>
             <h3>{item.name}</h3>
             <p>

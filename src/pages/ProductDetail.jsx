@@ -272,12 +272,22 @@ function ProductDetail() {
 
     if (product.options) {
       const defaultOptions = {};
-      Object.entries(product.options).forEach(([optionType, values]) => {
-        const defaultValue = values.find(([_, isDefault]) => isDefault);
-        if (defaultValue) {
-          defaultOptions[optionType] = defaultValue[0];
+      if (product.options.size) {
+        const defaultSize = product.options.size.find(
+          ([_, isDefault]) => isDefault
+        );
+        if (defaultSize) {
+          defaultOptions.size = defaultSize[0];
         }
-      });
+      }
+      if (product.options.temperature) {
+        const defaultTemp = product.options.temperature.find(
+          ([_, isDefault]) => isDefault
+        );
+        if (defaultTemp) {
+          defaultOptions.temperature = defaultTemp[0];
+        }
+      }
       setCustomOptions(defaultOptions);
     }
   }, [product, navigate]);
@@ -335,14 +345,11 @@ function ProductDetail() {
     if (!product?.options) return true;
 
     return Object.entries(product.options).every(([optionType, values]) => {
-      // 화이트펄과 치즈폼은 선택사항
       if (optionType === "화이트펄" || optionType === "치즈폼") return true;
 
-      // 뜨거운 음료의 경우 얼음량 옵션 제외
       if (optionType === "ice" && customOptions.temperature === "뜨겁게")
         return true;
 
-      // 나머지 옵션들은 필수 선택
       const hasValue =
         customOptions[optionType] !== undefined &&
         customOptions[optionType] !== "";
@@ -365,7 +372,9 @@ function ProductDetail() {
       </ProductHeader>
 
       <ProductImage
-        src={`${process.env.PUBLIC_URL}${product?.image}`}
+        src={`${process.env.PUBLIC_URL}/images/menu/${product?.image
+          .split("/")
+          .pop()}`}
         alt={product?.name}
       />
       <InfoButton>
