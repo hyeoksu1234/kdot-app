@@ -137,7 +137,7 @@ function Menu() {
       price: 6500,
       category: "signature",
       description: "부드러운 치즈폼과 전통 수정과의 달콤한 조화",
-      image: `${process.env.PUBLIC_URL}/images/cheese-wave-sujeonggwa.jpg`,
+      image: "/images/menu/cheese-wave-sujeonggwa.jpg",
     },
     {
       id: 2,
@@ -145,7 +145,7 @@ function Menu() {
       price: 7000,
       category: "blending",
       description: "망고, 코코넛, 베리 중 선택 가능한 프리미엄 블렌딩 식혜",
-      image: `${process.env.PUBLIC_URL}/images/sikhye-paradise.jpg`,
+      image: "/images/menu/sikhye-paradise.jpg",
     },
     {
       id: 3,
@@ -153,7 +153,7 @@ function Menu() {
       price: 7500,
       category: "signature",
       description: "치즈폼 토핑을 얹은 건강한 쌍화차",
-      image: `${process.env.PUBLIC_URL}/images/cheese-crown-ssanghwa.jpg`,
+      image: "/images/menu/cheese-crown-ssanghwa.jpg",
     },
     {
       id: 4,
@@ -161,7 +161,7 @@ function Menu() {
       price: 6800,
       category: "blending",
       description: "제주 녹차와 고소한 미숫가루의 완벽한 블렌딩",
-      image: `${process.env.PUBLIC_URL}/images/jeju-shake.jpg`,
+      image: "/images/menu/jeju-shake.jpg",
     },
     {
       id: 5,
@@ -169,7 +169,7 @@ function Menu() {
       price: 6000,
       category: "seasonal",
       description: "상쾌한 민트와 생강의 조화로운 탄산음료",
-      image: `${process.env.PUBLIC_URL}/images/mint-ginger-sparkle.jpg`,
+      image: "/images/menu/mint-ginger-sparkle.jpg",
     },
     {
       id: 6,
@@ -177,7 +177,7 @@ function Menu() {
       price: 6500,
       category: "traditional",
       description: "대추의 달콤함이 가득한 전통 음료",
-      image: `${process.env.PUBLIC_URL}/images/date-burst.jpg`,
+      image: "/images/menu/date-burst.jpg",
     },
     {
       id: 7,
@@ -185,7 +185,7 @@ function Menu() {
       price: 7000,
       category: "signature",
       description: "오미자의 오묘한 맛과 탄산의 상쾌함(논알콜)",
-      image: `${process.env.PUBLIC_URL}/images/omija-champagne.jpg`,
+      image: "/images/menu/omija-champagne.jpg",
     },
     {
       id: 8,
@@ -193,7 +193,7 @@ function Menu() {
       price: 6500,
       category: "seasonal",
       description: "상큼한 유자와 포도의 특별한 만남",
-      image: `${process.env.PUBLIC_URL}/images/yuza-grape.jpg`,
+      image: "/images/menu/yuza-grape.jpg",
     },
     {
       id: 9,
@@ -201,7 +201,7 @@ function Menu() {
       price: 7000,
       category: "traditional",
       description: "도라지와 꿀이 조화롭게 어우러진 건강음료",
-      image: `${process.env.PUBLIC_URL}/images/doraji-honey.jpg`,
+      image: "/images/menu/doraji-honey.jpg",
     },
     {
       id: 10,
@@ -209,7 +209,7 @@ function Menu() {
       price: 6800,
       category: "blending",
       description: "매실청과 얼그레이 티의 특별한 만남",
-      image: `${process.env.PUBLIC_URL}/images/maesil-earlgrey.jpg`,
+      image: "/images/menu/maesil-earlgrey.jpg",
     },
   ];
 
@@ -236,7 +236,7 @@ function Menu() {
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} to={`/product/${product.id}`}>
             <ProductImage
-              src={`${process.env.PUBLIC_URL}/images/menu/${product.image}`}
+              src={`${process.env.PUBLIC_URL}${product.image}`}
               alt={product.name}
             />
             <ProductInfo>
