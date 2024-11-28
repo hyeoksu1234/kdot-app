@@ -260,6 +260,7 @@ function ProductDetail() {
   const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
   const [customOptions, setCustomOptions] = useState({});
+  const [openSection, setOpenSection] = useState(null);
 
   const product = products.find((p) => p.id === parseInt(id));
 
@@ -341,7 +342,7 @@ function ProductDetail() {
       if (optionType === "ice" && customOptions.temperature === "뜨겁게")
         return true;
 
-      // �����지 옵션들은 필수 선택
+      // 나머지 옵션들은 필수 선택
       const hasValue =
         customOptions[optionType] !== undefined &&
         customOptions[optionType] !== "";
@@ -363,9 +364,9 @@ function ProductDetail() {
         </ProductTag>
       </ProductHeader>
 
-      <ProductImage 
-        src={`${process.env.PUBLIC_URL}${product?.image}`} 
-        alt={product?.name} 
+      <ProductImage
+        src={`${process.env.PUBLIC_URL}${product?.image}`}
+        alt={product?.name}
       />
       <InfoButton>
         <QuestionIcon />
