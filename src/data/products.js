@@ -23,7 +23,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 차베이스": [
+      "블렌딩 베이스": [
         ["자스민그린티", true],
         ["없이(카페인 FREE)", false],
       ],
@@ -129,7 +129,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 차베이스": [
+      "블렌딩 베이스": [
         ["자스민그린티(추천)", true],
         ["얼그레이(FREE)", false],
       ],
@@ -179,7 +179,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 차베이스": [
+      "블렌딩 베이스": [
         ["제주 녹차(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
