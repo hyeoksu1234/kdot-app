@@ -52,13 +52,14 @@ function App() {
   }
 
   return (
-    <Router basename="/kdot-app">
+    <Router>
       <CartProvider>
         <AppContainer>
           <Header />
           <MainContent>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/menu" element={<Menu />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/profile" element={<Profile />} />
