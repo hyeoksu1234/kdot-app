@@ -41,7 +41,7 @@ function App() {
 
   if (isFirstVisit) {
     return (
-      <Router basename="/home">
+      <Router basename="/kdot-app">
         <Splash
           onSplashComplete={() => {
             setIsFirstVisit(false);
@@ -52,7 +52,7 @@ function App() {
   }
 
   return (
-    <Router basename="/home">
+    <Router basename="/kdot-app">
       <CartProvider>
         <AppContainer>
           <Header />
