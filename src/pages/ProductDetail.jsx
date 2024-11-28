@@ -472,7 +472,7 @@ function ProductDetail() {
           {product?.category === "shake" && "쉐이크"}
         </ProductTag>
         <InfoLinkButton onClick={scrollToDetail}>
-          레시피 및 더 많은 정보 알아보기
+          상세보기
         </InfoLinkButton>
       </ProductHeader>
 
