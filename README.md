@@ -1,5 +1,3 @@
-cat > README.md << 'EOF'
-
 # K.Dot Cafe
 
 전통차를 현대적으로 재해석한 프리미엄 카페 웹 애플리케이션
