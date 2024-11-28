@@ -235,7 +235,10 @@ function Menu() {
       <ProductGrid>
         {filteredProducts.map((product) => (
           <ProductCard key={product.id} to={`/product/${product.id}`}>
-            <ProductImage src={product.image} alt={product.name} />
+            <ProductImage
+              src={`${process.env.PUBLIC_URL}/images/menu/${product.image}`}
+              alt={product.name}
+            />
             <ProductInfo>
               <h3>{product.name}</h3>
               <p className="description">{product.description}</p>

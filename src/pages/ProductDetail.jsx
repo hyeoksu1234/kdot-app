@@ -325,7 +325,7 @@ function ProductDetail() {
       id: product.id,
       name: product.name,
       price: product.price,
-      image: product.image,
+      image: `${process.env.PUBLIC_URL}/images/menu/${product.image}`,
       quantity: quantity,
       customOptions: customOptions,
       totalPrice: product.price * quantity,
@@ -368,7 +368,10 @@ function ProductDetail() {
         </ProductTag>
       </ProductHeader>
 
-      <ProductImage src={product?.image} alt={product?.name} />
+      <ProductImage 
+        src={`${process.env.PUBLIC_URL}/images/menu/${product.image}`} 
+        alt={product.name} 
+      />
       <InfoButton>
         <QuestionIcon />
         <span>{product?.description}</span>
