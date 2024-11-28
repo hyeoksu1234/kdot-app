@@ -368,6 +368,7 @@ function ProductDetail() {
           {product?.category === "signature" && "시그니처"}
           {product?.category === "blending" && "블렌딩"}
           {product?.category === "seasonal" && "시즌메뉴"}
+          {product?.category === "shake" && "쉐이크"}
         </ProductTag>
       </ProductHeader>
 

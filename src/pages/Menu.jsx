@@ -128,6 +128,7 @@ function Menu() {
     { id: "signature", name: "시그니처" },
     { id: "blending", name: "블렌딩" },
     { id: "seasonal", name: "시즌메뉴" },
+    { id: "shake", name: "쉐이크" },
   ];
 
   const products = [
