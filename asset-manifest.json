@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kdot-app/static/css/main.a6394a67.css",
+    "main.js": "/kdot-app/static/js/main.f3e549c7.js",
+    "index.html": "/kdot-app/index.html",
+    "main.a6394a67.css.map": "/kdot-app/static/css/main.a6394a67.css.map",
+    "main.f3e549c7.js.map": "/kdot-app/static/js/main.f3e549c7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a6394a67.css",
+    "static/js/main.f3e549c7.js"
+  ]
+}
