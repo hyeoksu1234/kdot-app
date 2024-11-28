@@ -8,7 +8,7 @@ const ProductDetailContainer = styled.div`
   max-width: 768px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
 `;
 
 const ProductHeader = styled.div`
@@ -177,7 +177,7 @@ const OptionSummary = styled.div`
     justify-content: center;
     font-size: 1rem;
     padding: 0;
-    
+
     &:hover {
       background: #ff7b28;
       color: white;
@@ -255,39 +255,31 @@ const CheckoutButton = styled(BaseButton)`
 `;
 
 function ProductDetail() {
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
-  const [openSection, setOpenSection] = useState(null);
   const [customOptions, setCustomOptions] = useState({});
-  const [product, setProduct] = useState(null);
+
+  const product = products.find((p) => p.id === parseInt(id));
 
   useEffect(() => {
-    const foundProduct = products.find((p) => p.id === Number(id));
-    setProduct(foundProduct);
-  }, [id]);
+    if (!product) {
+      navigate("/menu");
+      return;
+    }
 
-  useEffect(() => {
-    if (product?.options) {
+    if (product.options) {
       const defaultOptions = {};
       Object.entries(product.options).forEach(([optionType, values]) => {
-        if (optionType === "size" && values.length === 1) {
-          defaultOptions[optionType] = values[0][0];
-        }
-        if (optionType === "ice" && customOptions.temperature === "차갑게") {
-          const defaultOption = values.find(([name]) => name === "보통");
-          if (defaultOption) {
-            defaultOptions[optionType] = defaultOption[0];
-          }
+        const defaultValue = values.find(([_, isDefault]) => isDefault);
+        if (defaultValue) {
+          defaultOptions[optionType] = defaultValue[0];
         }
       });
-      setCustomOptions((prev) => ({
-        ...prev,
-        ...defaultOptions,
-      }));
+      setCustomOptions(defaultOptions);
     }
-  }, [product, customOptions.temperature]);
+  }, [product, navigate]);
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
@@ -344,12 +336,15 @@ function ProductDetail() {
     return Object.entries(product.options).every(([optionType, values]) => {
       // 화이트펄과 치즈폼은 선택사항
       if (optionType === "화이트펄" || optionType === "치즈폼") return true;
-      
+
       // 뜨거운 음료의 경우 얼음량 옵션 제외
-      if (optionType === "ice" && customOptions.temperature === "뜨겁게") return true;
-      
-      // 나머지 옵션들은 필수 선택
-      const hasValue = customOptions[optionType] !== undefined && customOptions[optionType] !== "";
+      if (optionType === "ice" && customOptions.temperature === "뜨겁게")
+        return true;
+
+      // �����지 옵션들은 필수 선택
+      const hasValue =
+        customOptions[optionType] !== undefined &&
+        customOptions[optionType] !== "";
       return hasValue;
     });
   };
@@ -369,8 +364,8 @@ function ProductDetail() {
       </ProductHeader>
 
       <ProductImage 
-        src={`${process.env.PUBLIC_URL}/images/menu/${product.image}`} 
-        alt={product.name} 
+        src={`${process.env.PUBLIC_URL}${product?.image}`} 
+        alt={product?.name} 
       />
       <InfoButton>
         <QuestionIcon />
