@@ -85,7 +85,256 @@ const ProductImage = styled.img`
   margin: 0;
 `;
 
-const InfoButton = styled.button`
+const OptionButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border: 1px solid ${(props) => (props.selected ? "#ff7b28" : "#eee")};
+  background: ${(props) => (props.selected ? "#fff6f2" : "white")};
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+
+  span {
+    color: ${(props) => (props.selected ? "#ff7b28" : "#333")};
+  }
+
+  .recommended {
+    font-size: 0.8rem;
+    color: #ff7b28;
+    border: 1px solid #ff7b28;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+  }
+
+  &:hover {
+    border-color: #ff7b28;
+    background: #fff6f2;
+  }
+`;
+
+const OptionsModal = styled.div`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px 20px 0 0;
+  transform: translateY(
+    ${(props) => (props.$isopen === "true" ? "0" : "100%")}
+  );
+  transition: transform 0.3s ease-in-out;
+  z-index: 1001; // TopHeader의 z-index(100)보다 높게 설정
+  max-height: 80vh;
+  overflow-y: auto;
+`;
+
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+const OptionsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: ${(props) => (props.$isopen === "true" ? 1 : 0)};
+  visibility: ${(props) => (props.$isopen === "true" ? "visible" : "hidden")};
+  transition: all 0.3s ease-in-out;
+  z-index: 1000; // TopHeader의 z-index(100)보다 높게 설정
+`;
+
+const QuantityControl = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+
+  button {
+    width: 36px;
+    height: 36px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+
+    &:hover {
+      background: #f5f5f5;
+    }
+  }
+
+  span {
+    font-size: 1.1rem;
+    min-width: 40px;
+    text-align: center;
+  }
+`;
+
+const FixedBottom = styled.div`
+  position: fixed;
+  bottom: 4.5rem;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+`;
+
+const ButtonContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+`;
+
+const BaseButton = styled.button`
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+`;
+
+const AddToCartButton = styled(BaseButton)`
+  background: white;
+  border: 1px solid #ff7b28;
+  color: #ff7b28;
+
+  &:hover:not(:disabled) {
+    background: #fff6f2;
+  }
+`;
+
+const CheckoutButton = styled(BaseButton)`
+  background: #ff7b28;
+  border: none;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background: #ff6b0f;
+  }
+`;
+
+const PriceDisplay = styled.div`
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: right;
+  color: #ff7b28;
+`;
+
+const DetailImage = styled.img`
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 100px;
+  border-radius: 12px;
+`;
+
+const ShowMoreButton = styled.button`
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  color: #666;
+
+  svg {
+    transform: ${(props) => (props.$isExpanded ? "rotate(180deg)" : "none")};
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: #f5f5f5;
+  }
+`;
+const OptionSelectButton = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  background: white;
+  border: 1px solid #eee;
+  padding: 1rem;
+  border-radius: 12px;
+  margin: 0.5rem 0;
+  cursor: pointer;
+
+  .icon-wrapper {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option-content {
+    flex: 1;
+    text-align: left;
+  }
+
+  .option-title {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+  }
+
+  .option-value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+  }
+
+  &:hover {
+    border-color: #ff7b28;
+    background: #fff6f2;
+  }
+`;
+const InfoLinkButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -101,278 +350,6 @@ const InfoButton = styled.button`
     flex: 1;
     text-align: left;
     color: #666;
-  }
-`;
-
-const OptionButton = styled.button`
-  width: 100%;
-  padding: 1rem;
-  margin: 0.5rem 0;
-  border: 2px solid ${(props) => (props.selected ? "#FF7B28" : "#ddd")};
-  background: ${(props) => (props.selected ? "#fff6f2" : "white")};
-  border-radius: 8px;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  .recommended {
-    font-size: 0.8rem;
-    color: #ff7b28;
-    background: #fff6f2;
-    padding: 0.2rem 0.5rem;
-    border-radius: 8px;
-  }
-`;
-
-const OptionsContainer = styled.div`
-  margin-top: 1rem;
-`;
-
-const QuantityControl = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1.5rem 0;
-
-  button {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background: white;
-    color: #333;
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &:hover {
-      background: #f5f5f5;
-    }
-
-    &:active {
-      background: #eee;
-    }
-
-    &:disabled {
-      color: #ccc;
-      cursor: not-allowed;
-    }
-  }
-
-  span {
-    font-size: 1.2rem;
-    font-weight: 500;
-    min-width: 40px;
-    text-align: center;
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin-top: 1rem;
-`;
-
-const AddToCartButton = styled.button`
-  width: 100%;
-  padding: 1rem;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: ${(props) => (props.disabled ? "not-allowed" : "pointer")};
-  background: ${(props) => (props.disabled ? "#ccc" : "#FF7B28")};
-  color: white;
-
-  &:hover {
-    background: ${(props) => (props.disabled ? "#ccc" : "#ff6b18")};
-  }
-`;
-
-const CheckoutButton = styled(AddToCartButton)`
-  background: ${(props) => (props.disabled ? "#ccc" : "#000")};
-  &:hover {
-    background: ${(props) => (props.disabled ? "#ccc" : "#333")};
-  }
-`;
-
-const OptionsModal = styled.div`
-  position: fixed;
-  bottom: ${(props) => (props.$isopen === "true" ? "0" : "-100%")};
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 20px 20px 0 0;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  transition: bottom 0.3s ease-in-out;
-  z-index: 1001;
-  max-height: 80vh;
-  overflow-y: auto;
-  padding-bottom: 5rem;
-`;
-
-const ModalHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-
-  h3 {
-    margin: 0;
-  }
-`;
-
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-`;
-
-const FixedBottom = styled.div`
-  position: fixed;
-  bottom: 4.5rem;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 1rem;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 999;
-`;
-
-const PriceDisplay = styled.div`
-  font-size: 1.25rem;
-  font-weight: 600;
-  text-align: right;
-  color: #ff7b28;
-`;
-
-const OptionSelectButton = styled.button`
-  width: 100%;
-  padding: 1.2rem;
-  margin: 0.5rem 0;
-  border: 1px solid #eee;
-  background: white;
-  border-radius: 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  transition: all 0.2s ease;
-
-  .icon-wrapper {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f5f5f5;
-    border-radius: 8px;
-  }
-
-  .option-content {
-    flex: 1;
-    text-align: left;
-  }
-
-  .option-title {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.2rem;
-  }
-
-  .option-value {
-    font-size: 1.1rem;
-    font-weight: 500;
-    color: #ff7b28;
-  }
-
-  &:hover {
-    border-color: #ff7b28;
-    background: #fff6f2;
-  }
-`;
-
-const DetailImage = styled.img`
-  width: 100%;
-  height: auto;
-  margin-top: 20px;
-  margin-bottom: 100px;
-  border-radius: 12px;
-`;
-
-const Overlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: ${(props) => (props.$isopen === "true" ? 1 : 0)};
-  visibility: ${(props) => (props.$isopen === "true" ? "visible" : "hidden")};
-  transition: all 0.3s ease-out;
-  z-index: 999;
-`;
-
-const ShowMoreButton = styled.button`
-  width: 200px;
-  padding: 0.8rem 1.2rem;
-  margin: 1.5rem auto;
-  border: 1px solid #ddd;
-  background: white;
-  border-radius: 20px;
-  cursor: pointer;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: #ff7b28;
-    background: #fff6f2;
-    color: #ff7b28;
-  }
-
-  svg {
-    width: 16px;
-    height: 16px;
-    transform: ${(props) =>
-      props.$isExpanded ? "rotate(180deg)" : "rotate(0deg)"};
-    transition: transform 0.3s ease;
-
-    path {
-      stroke: currentColor;
-      stroke-width: 2.5;
-    }
-  }
-`;
-
-const InfoLinkButton = styled.button`
-  background: transparent;
-  border: 1px solid #ff7b28;
-  color: #ff7b28;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 1rem;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-
-  &:hover {
-    background: #fff6f2;
   }
 `;
 
@@ -397,22 +374,12 @@ function ProductDetail() {
 
     if (product.options) {
       const defaultOptions = {};
-      if (product.options.size) {
-        const defaultSize = product.options.size.find(
-          ([_, isDefault]) => isDefault
-        );
-        if (defaultSize) {
-          defaultOptions.size = defaultSize[0];
+      Object.entries(product.options).forEach(([optionType, values]) => {
+        const defaultOption = values.find(([_, isDefault]) => isDefault);
+        if (defaultOption) {
+          defaultOptions[optionType] = defaultOption[0];
         }
-      }
-      if (product.options.temperature) {
-        const defaultTemp = product.options.temperature.find(
-          ([_, isDefault]) => isDefault
-        );
-        if (defaultTemp) {
-          defaultOptions.temperature = defaultTemp[0];
-        }
-      }
+      });
       setCustomOptions(defaultOptions);
     }
   }, [product, navigate]);
@@ -427,23 +394,10 @@ function ProductDetail() {
   }, []);
 
   const handleOptionChange = (type, value) => {
-    if (type === "화이트펄" || type === "치즈폼") {
-      setCustomOptions((prev) => ({
-        ...prev,
-        [type]: value,
-      }));
-    } else if (type === "temperature") {
-      setCustomOptions((prev) => ({
-        ...prev,
-        [type]: value,
-        ice: value === "뜨겁게" ? undefined : prev.ice,
-      }));
-    } else {
-      setCustomOptions((prev) => ({
-        ...prev,
-        [type]: value,
-      }));
-    }
+    setCustomOptions((prev) => ({
+      ...prev,
+      [type]: value,
+    }));
     setOpenSection(null);
   };
 
@@ -455,19 +409,27 @@ function ProductDetail() {
   };
 
   const calculateTotalPrice = () => {
+    if (!product) return 0;
+
     let basePrice = product.price;
+
+    // Large 사이즈 선택시 800원 추가
     if (customOptions.size === "Large (+800원)") {
       basePrice += 800;
     }
+
     return basePrice * quantity;
   };
 
   const handleAddToCart = () => {
-    const totalPrice = calculateTotalPrice();
+    const basePrice =
+      product.price + (customOptions.size === "Large (+800원)" ? 800 : 0);
+    const totalPrice = basePrice * quantity;
+
     addToCart({
       id: product.id,
       name: product.name,
-      price: product.price,
+      price: basePrice, // 사이즈 추가 금액이 포함된 가격
       image: product.image,
       quantity: quantity,
       customOptions: customOptions,
@@ -517,7 +479,7 @@ function ProductDetail() {
         </BackButton>
         <PageTitle>{product?.name}</PageTitle>
       </TopHeader>
-      <Overlay $isopen={openSection ? "true" : "false"} />
+
       <ProductHeader>
         <ProductTitle>{product?.name}</ProductTitle>
         <ProductSubtitle>{product?.category}</ProductSubtitle>
@@ -532,17 +494,13 @@ function ProductDetail() {
         alt={product?.name}
       />
 
-      <InfoButton>
-        <span>{product?.description}</span>
-      </InfoButton>
-
       {product?.options &&
         Object.entries(product.options)
           .slice(0, showAllOptions ? undefined : 4)
           .map(([optionType, values]) => {
             if (
               optionType === "ice" &&
-              customOptions.temperature !== "차갑게"
+              customOptions.temperature === "뜨겁게"
             ) {
               return null;
             }
@@ -555,7 +513,7 @@ function ProductDetail() {
                     {optionType === "temperature" && <TemperatureIcon />}
                     {optionType === "ice" && <IceIcon />}
                     {optionType === "sweetness" && <SweetnessIcon />}
-                    {optionType === "블렌딩 베이스" && <BlendingIcon />}
+                    {optionType === "블렌딩베이스" && <BlendingIcon />}
                     {optionType === "화이트펄" && <PearlIcon />}
                     {optionType === "치즈폼" && <CheeseIcon />}
                     {optionType === "탄산" && <SparklingIcon />}
@@ -573,8 +531,8 @@ function ProductDetail() {
                         ? "얼음량"
                         : optionType === "sweetness"
                         ? "당도"
-                        : optionType === "블렌딩 베이스"
-                        ? "블렌�� 베이스"
+                        : optionType === "블렌딩베이스"
+                        ? "블렌딩 베이스"
                         : optionType === "화이트펄"
                         ? "펄"
                         : optionType === "치즈폼"
@@ -607,8 +565,8 @@ function ProductDetail() {
                         ? "얼음량"
                         : optionType === "sweetness"
                         ? "당도"
-                        : optionType === "블렌딩 베이스"
-                        ? "식혜 베이스"
+                        : optionType === "블렌딩베이스"
+                        ? "블렌딩 베이스"
                         : optionType === "화이트펄"
                         ? "펄"
                         : optionType === "치즈폼"
@@ -655,9 +613,7 @@ function ProductDetail() {
       </QuantityControl>
 
       <FixedBottom>
-        <PriceDisplay>
-          {(product?.price * quantity).toLocaleString()}원
-        </PriceDisplay>
+        <PriceDisplay>{calculateTotalPrice().toLocaleString()}원</PriceDisplay>
         <ButtonContainer>
           <AddToCartButton
             onClick={handleAddToCart}

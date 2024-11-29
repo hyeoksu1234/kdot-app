@@ -26,7 +26,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 베이스": [
+      블렌딩베이스: [
         ["자스민그린티", true],
         ["없이(카페인 FREE)", false],
       ],
@@ -84,7 +84,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 베이스": [
+      블렌딩베이스: [
         ["망고", false],
         ["코코넛", false],
         ["베리", false],
@@ -138,7 +138,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 베이스": [
+      블렌딩베이스: [
         ["자스민그린티(추천)", true],
         ["얼그레이(FREE)", false],
       ],
@@ -191,7 +191,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 베이스": [
+      블렌딩베이스: [
         ["제주 녹차(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
@@ -316,7 +316,7 @@ export const products = [
         ["스파클링(추천)", true],
         ["탄산 없이", false],
       ],
-      "블렌딩 베이스": [
+      블렌딩베이스: [
         ["오렌지(추천)", true],
         ["크랜베리", false],
       ],
