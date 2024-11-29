@@ -72,7 +72,7 @@ const ProductInfo = styled.div`
 
   .category {
     font-size: 0.75rem;
-    color: #666;
+    color: var(--text-secondary);
     margin-bottom: 0.3rem;
   }
 
@@ -80,16 +80,17 @@ const ProductInfo = styled.div`
     font-size: 0.9rem;
     margin: 0 0 0.2rem 0;
     font-weight: 600;
+    color: var(--text-primary);
   }
 
   .description {
     font-size: 0.7rem;
-    color: #8e8e93;
+    color: var(--text-secondary);
     margin: 0 0 0.5rem 0;
   }
 
   .price {
-    color: #1c1c1e;
+    color: var(--text-primary);
     font-weight: 600;
     font-size: 1.1rem;
     margin: 0;

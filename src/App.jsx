@@ -7,11 +7,13 @@ import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./contexts/CartContext";
+import GlobalStyle from './styles/GlobalStyle';
 
 function App() {
   return (
     <CartProvider>
       <Router>
+        <GlobalStyle />
         <div className="App">
           <Routes>
             <Route path="/" element={<Home />} />
