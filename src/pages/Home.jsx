@@ -77,7 +77,7 @@ const SharedSection = styled.div`
   background: ${(props) =>
       props.$isEvent
         ? `linear-gradient(rgba(98, 58, 36, 0.85), rgba(98, 58, 36, 0.85)), 
-       url(${process.env.PUBLIC_URL}/images/background/traditional-brown.jpg)`
+       url(${process.env.PUBLIC_URL}/images/background/traditional.jpg)`
         : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
        url(${process.env.PUBLIC_URL}/images/background/traditional.jpg)`}
     center/cover;
@@ -212,13 +212,13 @@ function Home() {
         <EventGrid>
           <EventCard>
             <img
-              src={`${process.env.PUBLIC_URL}/images/events/summer-special.jpg`}
+              src={`${process.env.PUBLIC_URL}/images/events/summer-special.png`}
               alt="여름 시즌 메뉴"
             />
             <div className="content">
-              <h3>여름 시즌 한정 메뉴</h3>
-              <p>시원한 수박화채와 함께하는 무더운 여름</p>
-              <p className="date">2024.06.01 - 2024.08.31</p>
+              <h3>겨울 시즌 한정 메뉴</h3>
+              <p>고소한 앙버터 송편과 상큼한 유자의 완벽한 만남</p>
+              <p className="date">2024.012.01 - 2025.01.31</p>
             </div>
           </EventCard>
           <EventCard>
