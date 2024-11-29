@@ -40,7 +40,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   line-height: 1.8;
   margin-bottom: 2rem;
   opacity: 0.9;
