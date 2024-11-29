@@ -1,126 +1,150 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MenuContainer = styled.div`
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 4rem 0 5rem;
+  max-width: 768px;
   margin: 0 auto;
+  background: #f5f5f5;
 `;
 
 const CategoryNav = styled.nav`
-  margin-bottom: 2rem;
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: white;
+  overflow-x: auto;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CategoryButton = styled.button`
-  padding: 0.8rem 1.5rem;
+  padding: 0.5rem 1rem;
   border: none;
-  background: ${(props) => (props.$active === "true" ? "#FF7B28" : "#f0f0f0")};
-  color: ${(props) => (props.$active === "true" ? "white" : "#333")};
   border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+  background: ${(props) => (props.$active === "true" ? "#FF7B28" : "#f5f5f5")};
+  color: ${(props) => (props.$active === "true" ? "white" : "#666")};
+  font-size: 0.9rem;
   font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s ease;
 
   &:hover {
     background: ${(props) =>
-      props.$active === "true" ? "#E66A1F" : "#e0e0e0"};
-    transform: translateY(-2px);
+      props.$active === "true" ? "#FF7B28" : "#eeeeee"};
   }
 `;
 
 const ProductGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
-  padding: 0 0.5rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    padding: 0 0.3rem;
-  }
-
-  @media (max-width: 480px) {
-    gap: 0.5rem;
-    padding: 0 0.2rem;
-  }
+  padding: 1rem;
+  padding-bottom: 5rem;
 `;
 
 const ProductCard = styled(Link)`
   text-decoration: none;
   color: inherit;
   background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transition: all 0.3s ease;
-  height: 100%;
   display: flex;
-  flex-direction: column;
-
-  @media (max-width: 768px) {
-    border-radius: 8px;
-  }
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
 `;
 
 const ProductImage = styled.img`
-  width: 100%;
-  height: 160px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   object-fit: cover;
-
-  @media (max-width: 768px) {
-    height: 140px;
-  }
-
-  @media (max-width: 480px) {
-    height: 120px;
-  }
+  margin-right: 1rem;
 `;
 
 const ProductInfo = styled.div`
-  padding: 1rem;
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+
+  .category {
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 0.3rem;
+  }
 
   h3 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-
-    @media (max-width: 768px) {
-      font-size: 0.9rem;
-    }
+    font-size: 0.9rem;
+    margin: 0 0 0.2rem 0;
+    font-weight: 600;
   }
 
   .description {
-    color: #666;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-
-    @media (max-width: 768px) {
-      font-size: 0.8rem;
-    }
+    font-size: 0.7rem;
+    color: #8e8e93;
+    margin: 0 0 0.5rem 0;
   }
 
   .price {
-    color: #ff7b28;
+    color: #1c1c1e;
     font-weight: 600;
-    font-size: 1rem;
-
-    @media (max-width: 768px) {
-      font-size: 0.9rem;
-    }
+    font-size: 1.1rem;
+    margin: 0;
   }
 `;
 
+const TopHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 100;
+  box-shadow: ${(props) =>
+    props.$scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none"};
+`;
+
+const BackButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const PageTitle = styled.h1`
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+`;
+
 function Menu() {
+  const navigate = useNavigate();
   const [category, setCategory] = useState("all");
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const categories = [
     { id: "all", name: "전체" },
@@ -144,7 +168,7 @@ function Menu() {
       name: "식혜 파라다이스",
       price: 7000,
       category: "blending",
-      description: "망고, 코코넛, 베리 중 선택 가능한 프리미엄 블렌딩 식혜",
+      description: "프리미엄 블렌딩 식혜",
       image: "/images/menu/sikhye-paradise.jpg",
     },
     {
@@ -176,7 +200,7 @@ function Menu() {
       name: "대추 버스트",
       price: 6500,
       category: "traditional",
-      description: "대추의 달콤함이 가득한 전통 음료",
+      description: "대추의 달함이 가득한 전통 음료",
       image: "/images/menu/date-burst.jpg",
     },
     {
@@ -220,7 +244,19 @@ function Menu() {
 
   return (
     <MenuContainer>
-      <h1>메뉴</h1>
+      <TopHeader $scrolled={isScrolled}>
+        <BackButton onClick={() => navigate(-1)}>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </BackButton>
+        <PageTitle>메뉴</PageTitle>
+      </TopHeader>
       <CategoryNav>
         {categories.map((cat) => (
           <CategoryButton
@@ -240,6 +276,22 @@ function Menu() {
               alt={product.name}
             />
             <ProductInfo>
+              <div className="category">
+                {(() => {
+                  switch (product.category) {
+                    case "signature":
+                      return "시그니처";
+                    case "traditional":
+                      return "전통음료";
+                    case "seasonal":
+                      return "시즌메뉴";
+                    case "blending":
+                      return "블렌딩";
+                    default:
+                      return "";
+                  }
+                })()}
+              </div>
               <h3>{product.name}</h3>
               <p className="description">{product.description}</p>
               <p className="price">{product.price.toLocaleString()}원</p>

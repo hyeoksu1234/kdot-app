@@ -1,64 +1,76 @@
-import React, { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { CartContext } from "../contexts/CartContext";
+import { FaHome, FaCoffee, FaShoppingCart, FaEllipsisH } from "react-icons/fa";
 
-const Nav = styled.nav`
+const NavbarContainer = styled.nav`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+`;
+
+const NavList = styled.ul`
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  padding: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem 0;
+`;
+
+const NavItem = styled.li`
+  text-align: center;
 `;
 
 const NavLink = styled(Link)`
-  text-decoration: none;
-  color: inherit;
-  
-  &:hover {
-    color: #FF7B28;
-  }
-`;
-
-const CartLink = styled(Link)`
-  position: relative;
-  text-decoration: none;
-  color: inherit;
-  
-  &:hover {
-    color: #FF7B28;
-  }
-`;
-
-const CartBadge = styled.span`
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background: #FF7B28;
-  color: white;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-decoration: none;
+  color: ${props => props.$active ? '#FF7B28' : '#666'};
   font-size: 0.8rem;
-  font-weight: bold;
+  gap: 0.3rem;
+  padding: 0.5rem;
+
+  svg {
+    font-size: 1.3rem;
+  }
 `;
 
 function Navbar() {
-  const { cartItems } = useContext(CartContext);
-  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const location = useLocation();
 
   return (
-    <Nav>
-      <NavLink to="/">홈</NavLink>
-      <NavLink to="/menu">메뉴</NavLink>
-      <CartLink to="/cart">
-        장바구니
-        {totalItems > 0 && <CartBadge>{totalItems}</CartBadge>}
-      </CartLink>
-      <NavLink to="/profile">프로필</NavLink>
-    </Nav>
+    <NavbarContainer>
+      <NavList>
+        <NavItem>
+          <NavLink to="/" $active={location.pathname === "/"}>
+            <FaHome />
+            홈
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/menu" $active={location.pathname === "/menu"}>
+            <FaCoffee />
+            메뉴
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/cart" $active={location.pathname === "/cart"}>
+            <FaShoppingCart />
+            장바구니
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink to="/profile" $active={location.pathname === "/profile"}>
+            <FaEllipsisH />
+            더보기
+          </NavLink>
+        </NavItem>
+      </NavList>
+    </NavbarContainer>
   );
 }
 

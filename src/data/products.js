@@ -7,7 +7,10 @@ export const products = [
     description: "부드러운 치즈폼과 전통 수정과의 달콤한 조화",
     image: "/images/cheese-wave-sujeonggwa.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -62,7 +65,10 @@ export const products = [
     description: "망고, 코코넛, 베리 중 선택 가능한 프리미엄 블렌딩 식혜",
     image: "/images/sikhye-paradise.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -113,7 +119,10 @@ export const products = [
     description: "치즈폼 토핑을 얹은 건강한 쌍화차",
     image: "/images/cheese-crown-ssanghwa.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -129,7 +138,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      "블렌딩 베이스": [
+      "블렌딩 차베이스": [
         ["자스민그린티(추천)", true],
         ["얼그레이(FREE)", false],
       ],
@@ -163,7 +172,10 @@ export const products = [
     description: "제주 녹차와 고소한 미숫가루의 완벽한 블렌딩",
     image: "/images/jeju-shake.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -218,7 +230,10 @@ export const products = [
     description: "상쾌한 민트와 생강의 스파클링 음료",
     image: "/images/mint-ginger-sparkle.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -278,7 +293,10 @@ export const products = [
     description: "대추의 달콤함이 가득한 시그니처 음료",
     image: "/images/date-burst.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -298,7 +316,7 @@ export const products = [
         ["스파클링(추천)", true],
         ["탄산 없이", false],
       ],
-      오렌지: [
+      "블렌딩 베이스": [
         ["오렌지(추천)", true],
         ["크랜베리", false],
       ],
@@ -337,7 +355,10 @@ export const products = [
     description: "오미자와 샴페인의 상큼한 만남",
     image: "/images/omija-champagne.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -393,7 +414,10 @@ export const products = [
     description: "상큼한 유자와 달콤한 포도의 조화가 돋보이는 음료",
     image: "/images/yuza-grape.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -413,10 +437,6 @@ export const products = [
         ["코코넛펄", false],
         ["흑당펄", false],
         ["알로에펄(추천)", true],
-      ],
-      "포도&유자라인": [
-        ["포도", false],
-        ["유자(추천)", true],
       ],
       치즈폼: [
         ["기본 치즈폼", false],
@@ -448,7 +468,10 @@ export const products = [
     description: "도라지와 꿀의 건강한 만남",
     image: "/images/doraji-honey.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],
@@ -502,7 +525,10 @@ export const products = [
     description: "상큼한 매실과 얼그레이의 깊은 풍미",
     image: "/images/maesil-earlgrey.jpg",
     options: {
-      size: [["Regular", true]],
+      size: [
+        ["Regular", true],
+        ["Large (+800원)", false],
+      ],
       temperature: [
         ["차갑게", true],
         ["뜨겁게", false],

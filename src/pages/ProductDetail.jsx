@@ -16,45 +16,73 @@ import {
 } from "../components/Icons";
 
 const ProductDetailContainer = styled.div`
-  padding: 1rem;
+  padding: 0;
   max-width: 768px;
   margin: 0 auto;
   padding-bottom: 150px;
 `;
 
-const ProductHeader = styled.div`
-  margin-bottom: 1rem;
+const TopHeader = styled.div`
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 0.8rem;
+  padding: 1rem;
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow 0.3s ease;
+  box-shadow: ${(props) =>
+    props.$scrolled ? "0 2px 4px rgba(0, 0, 0, 0.1)" : "none"};
+`;
+
+const BackButton = styled.button`
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin-right: 1rem;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: #333;
+  }
+`;
+
+const PageTitle = styled.h1`
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+`;
+
+const ProductHeader = styled.div`
+  padding: 1.5rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 const ProductTitle = styled.h2`
   margin: 0;
-  font-size: 1.5rem;
-  width: 100%;
+  font-size: 1.3rem;
+  font-weight: 600;
+`;
+
+const ProductSubtitle = styled.span`
+  color: #999;
+  font-size: 0.9rem;
 `;
 
 const ProductPrice = styled.div`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #ff7b28;
-`;
-
-const ProductTag = styled.span`
-  background: #ff7b28;
-  color: white;
-  padding: 0.3rem 0.6rem;
-  border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #333;
 `;
 
 const ProductImage = styled.img`
   width: 100%;
   height: auto;
-  border-radius: 12px;
-  margin: 1rem 0;
+  margin: 0;
 `;
 
 const InfoButton = styled.button`
@@ -177,13 +205,16 @@ const OptionsModal = styled.div`
   position: fixed;
   bottom: ${(props) => (props.$isopen === "true" ? "0" : "-100%")};
   left: 0;
-  width: 100%;
+  right: 0;
   background: white;
+  padding: 1.5rem;
   border-radius: 20px 20px 0 0;
-  padding: 20px;
-  transition: bottom 0.3s ease-out;
-  z-index: 1000;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  transition: bottom 0.3s ease-in-out;
+  z-index: 1001;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding-bottom: 5rem;
 `;
 
 const ModalHeader = styled.div`
@@ -206,15 +237,13 @@ const CloseButton = styled.button`
 
 const FixedBottom = styled.div`
   position: fixed;
-  bottom: 0;
+  bottom: 4.5rem;
   left: 0;
-  width: 100%;
+  right: 0;
   background: white;
-  padding: 15px;
+  padding: 1rem;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  z-index: 999;
 `;
 
 const PriceDisplay = styled.div`
@@ -360,6 +389,7 @@ function ProductDetail() {
   const [openSection, setOpenSection] = useState(null);
   const [showAllOptions, setShowAllOptions] = useState(false);
   const detailRef = useRef(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const product = products.find((p) => p.id === parseInt(id));
 
@@ -391,6 +421,15 @@ function ProductDetail() {
     }
   }, [product, navigate]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const handleOptionChange = (type, value) => {
     if (type === "화이트펄" || type === "치즈폼") {
       setCustomOptions((prev) => ({
@@ -419,7 +458,16 @@ function ProductDetail() {
     }
   };
 
+  const calculateTotalPrice = () => {
+    let basePrice = product.price;
+    if (customOptions.size === "Large (+800원)") {
+      basePrice += 800;
+    }
+    return basePrice * quantity;
+  };
+
   const handleAddToCart = () => {
+    const totalPrice = calculateTotalPrice();
     addToCart({
       id: product.id,
       name: product.name,
@@ -427,7 +475,7 @@ function ProductDetail() {
       image: product.image,
       quantity: quantity,
       customOptions: customOptions,
-      totalPrice: product.price * quantity,
+      totalPrice: totalPrice,
     });
     navigate("/menu");
   };
@@ -460,20 +508,25 @@ function ProductDetail() {
 
   return (
     <ProductDetailContainer>
+      <TopHeader $scrolled={isScrolled}>
+        <BackButton onClick={() => navigate(-1)}>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </BackButton>
+        <PageTitle>{product?.name}</PageTitle>
+      </TopHeader>
       <Overlay $isopen={openSection ? "true" : "false"} />
       <ProductHeader>
         <ProductTitle>{product?.name}</ProductTitle>
+        <ProductSubtitle>{product?.category}</ProductSubtitle>
         <ProductPrice>{product?.price?.toLocaleString()}원</ProductPrice>
-        <ProductTag>
-          {product?.category === "traditional" && "전통차"}
-          {product?.category === "signature" && "시그니처"}
-          {product?.category === "blending" && "블렌딩"}
-          {product?.category === "seasonal" && "시즌메뉴"}
-          {product?.category === "shake" && "쉐이크"}
-        </ProductTag>
-        <InfoLinkButton onClick={scrollToDetail}>
-          상세보기
-        </InfoLinkButton>
+        <InfoLinkButton onClick={scrollToDetail}>상세보기</InfoLinkButton>
       </ProductHeader>
 
       <ProductImage
@@ -627,11 +680,14 @@ function ProductDetail() {
         </ButtonContainer>
       </FixedBottom>
 
-      {product?.name === "식혜 파라다이스" && (
+      {product?.image && (
         <DetailImage
           ref={detailRef}
-          src={`${process.env.PUBLIC_URL}/images/menu/sikhye-paradise-detail.jpg`}
-          alt="식혜 파라다이스 상세 설명"
+          src={`${process.env.PUBLIC_URL}/images/menu/${product.image
+            .split("/")
+            .pop()
+            .replace(".jpg", "-detail.jpg")}`}
+          alt={`${product?.name} 상세 설명`}
         />
       )}
     </ProductDetailContainer>

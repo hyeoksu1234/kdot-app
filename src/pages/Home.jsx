@@ -47,7 +47,7 @@ const Title = styled.h1`
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 2rem;
   line-height: 1.6;
   max-width: 600px;
@@ -75,9 +75,9 @@ const SectionTitle = styled.h2`
   color: #ff7b28;
 `;
 
-const EventSection = styled.div`
+const SharedSection = styled.div`
   padding: 6rem 2rem;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
 `;
 
@@ -130,12 +130,6 @@ const EventCard = styled.div`
   }
 `;
 
-const RecommendSection = styled.div`
-  padding: 6rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-`;
-
 const FeaturedSection = styled.div`
   padding: 6rem 2rem;
   background: rgba(0, 0, 0, 0.8);
@@ -181,13 +175,16 @@ function Home() {
         <BrandLogo />
         <Title>K.Dot Cafe</Title>
         <Subtitle>
-          전통차의 깊이와 현대적 감각이 만나는 곳<br />
-          한국의 전통 음료를 새롭게 재해석한 특별한 경험
+          K.Dot은 한국 전통음료의 맛과 가치를 <br />
+          현대적으로 재해석 하여 세계로 확장하며, 
+          <br />
+          혁신적 기술과 개인 맞춤형 경험을 통해 <br />
+          건강하고 즐거운 라이프스타일을 제안합니다.
         </Subtitle>
         <MenuButton to="/menu">메뉴 보기</MenuButton>
       </HeroSection>
 
-      <EventSection>
+      <SharedSection>
         <SectionTitle>진행중인 이벤트</SectionTitle>
         <EventGrid>
           <EventCard>
@@ -213,9 +210,9 @@ function Home() {
             </div>
           </EventCard>
         </EventGrid>
-      </EventSection>
+      </SharedSection>
 
-      <RecommendSection>
+      <SharedSection>
         <SectionTitle>이 달의 추천 메뉴</SectionTitle>
         <EventGrid>
           <EventCard>
@@ -239,7 +236,7 @@ function Home() {
             </div>
           </EventCard>
         </EventGrid>
-      </RecommendSection>
+      </SharedSection>
 
       <FeaturedSection>
         <SectionTitle>K.Dot의 특별함</SectionTitle>
