@@ -358,26 +358,21 @@ const ShowMoreButton = styled.button`
 `;
 
 const InfoLinkButton = styled.button`
+  background: transparent;
+  border: 1px solid #ff7b28;
+  color: #ff7b28;
   padding: 0.5rem 1rem;
-  margin-left: auto;
-  border: 1px solid #eee;
-  background: white;
-  border-radius: 20px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1rem;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #666;
-  font-size: 0.9rem;
-  transition: all 0.15s ease;
+  margin-top: 1rem;
 
   &:hover {
-    background: #f8f8f8;
-  }
-
-  &:active {
-    background: #f0f0f0;
-    transform: scale(0.98);
+    background: #fff6f2;
   }
 `;
 

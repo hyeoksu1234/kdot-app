@@ -15,7 +15,7 @@ const fadeIn = keyframes`
 `;
 
 const HomeContainer = styled.div`
-  min-height: 100vh;
+  min-height: 90vh;
   background: #ff7b28;
   color: white;
 `;
@@ -64,7 +64,7 @@ const MenuButton = styled(Link)`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   margin-bottom: 3rem;
   text-align: center;
   font-family: "Hahmlet", serif;
@@ -146,10 +146,10 @@ const EventCard = styled.div`
     }
 
     .date {
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       color: #ff7b28;
       font-weight: 600;
-      text-align: right;
+      text-align: left; // 오른쪽에서 왼쪽으로 변경
     }
   }
 `;
