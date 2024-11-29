@@ -16,54 +16,50 @@ const fadeIn = keyframes`
 
 const HomeContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-    url(${process.env.PUBLIC_URL}/images/background/traditional-tea.jpg);
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: #ff7b28;
   color: white;
 `;
 
 const HeroSection = styled.section`
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--primary-color);
-  color: white;
-  padding: 2rem;
   text-align: center;
-  position: relative;
-  overflow-x: hidden;
+  padding: 2rem;
+  background: url(${process.env.PUBLIC_URL}/images/background/traditional.jpg)
+    center/cover;
 `;
 
 const Title = styled.h1`
   font-size: 3.5rem;
-  margin-bottom: 1rem;
-  font-weight: 700;
+  margin: 2rem 0;
+  font-family: "Hahmlet", serif;
+  animation: ${fadeIn} 1s ease-out;
 `;
 
 const Subtitle = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
+  line-height: 1.8;
   margin-bottom: 2rem;
-  line-height: 1.6;
-  max-width: 600px;
+  opacity: 0.9;
+  animation: ${fadeIn} 1s ease-out 0.3s backwards;
 `;
 
 const MenuButton = styled(Link)`
-  background-color: white;
-  color: var(--primary-color);
+  background: white;
+  color: #ff7b28;
   padding: 1rem 2rem;
-  border-radius: 8px;
+  border-radius: 30px;
   text-decoration: none;
-  font-weight: 600;
-  transition: background-color 0.3s ease;
+  font-weight: 500;
+  animation: ${fadeIn} 1s ease-out 0.6s backwards;
+  transition: transform 0.3s ease;
+  align-self: center;
 
   &:hover {
-    background-color: #f0f0f0;
+    transform: translateY(-3px);
   }
 `;
 
@@ -72,13 +68,38 @@ const SectionTitle = styled.h2`
   margin-bottom: 3rem;
   text-align: center;
   font-family: "Hahmlet", serif;
-  color: #ff7b28;
+  background: url(${process.env.PUBLIC_URL}/images/background/traditional.jpg)
+    center/cover;
 `;
 
 const SharedSection = styled.div`
   padding: 6rem 2rem;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  background: ${(props) =>
+      props.$isEvent
+        ? `linear-gradient(rgba(98, 58, 36, 0.85), rgba(98, 58, 36, 0.85)), 
+       url(${process.env.PUBLIC_URL}/images/background/traditional-brown.jpg)`
+        : `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+       url(${process.env.PUBLIC_URL}/images/background/traditional.jpg)`}
+    center/cover;
+  background-attachment: fixed;
+  color: white;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(5px);
+    z-index: 1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
 `;
 
 const EventGrid = styled.div`
@@ -91,10 +112,11 @@ const EventGrid = styled.div`
 
 const EventCard = styled.div`
   background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   overflow: hidden;
-  animation: ${fadeIn} 1s ease-out;
-  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   transition: transform 0.3s ease;
 
   &:hover {
@@ -114,10 +136,11 @@ const EventCard = styled.div`
       font-size: 1.5rem;
       margin-bottom: 1rem;
       font-family: "Hahmlet", serif;
+      color: white;
     }
 
     p {
-      opacity: 0.9;
+      color: rgba(255, 255, 255, 0.8);
       margin-bottom: 1rem;
       line-height: 1.6;
     }
@@ -126,29 +149,30 @@ const EventCard = styled.div`
       font-size: 0.9rem;
       color: #ff7b28;
       font-weight: 600;
+      text-align: right;
     }
   }
 `;
 
 const FeaturedSection = styled.div`
   padding: 6rem 2rem;
-  background: rgba(0, 0, 0, 0.8);
+  background: #1c1c1e;
+  color: white;
 `;
 
 const FeaturedGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   max-width: 1200px;
   margin: 0 auto;
 `;
 
 const FeaturedItem = styled.div`
-  background: rgba(255, 255, 255, 0.1);
-  padding: 2.5rem;
-  border-radius: 20px;
   text-align: center;
-  backdrop-filter: blur(10px);
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
   transition: transform 0.3s ease;
 
   &:hover {
@@ -157,14 +181,14 @@ const FeaturedItem = styled.div`
 
   h3 {
     font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    font-family: "Hahmlet", serif;
+    margin-bottom: 1rem;
     color: #ff7b28;
+    font-family: "Hahmlet", serif;
   }
 
   p {
+    line-height: 1.6;
     opacity: 0.9;
-    line-height: 1.8;
   }
 `;
 
@@ -176,15 +200,14 @@ function Home() {
         <Title>K.Dot Cafe</Title>
         <Subtitle>
           K.Dot은 한국 전통음료의 맛과 가치를 <br />
-          현대적으로 재해석 하여 세계로 확장하며, 
-          <br />
+          현대적으로 재해석 하여 세계로 확장하며, <br />
           혁신적 기술과 개인 맞춤형 경험을 통해 <br />
           건강하고 즐거운 라이프스타일을 제안합니다.
         </Subtitle>
         <MenuButton to="/menu">메뉴 보기</MenuButton>
       </HeroSection>
 
-      <SharedSection>
+      <SharedSection $isEvent={true}>
         <SectionTitle>진행중인 이벤트</SectionTitle>
         <EventGrid>
           <EventCard>
@@ -212,7 +235,7 @@ function Home() {
         </EventGrid>
       </SharedSection>
 
-      <SharedSection>
+      <SharedSection $isEvent={false}>
         <SectionTitle>이 달의 추천 메뉴</SectionTitle>
         <EventGrid>
           <EventCard>

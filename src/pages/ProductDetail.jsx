@@ -303,6 +303,7 @@ const DetailImage = styled.img`
   width: 100%;
   height: auto;
   margin-top: 20px;
+  margin-bottom: 100px;
   border-radius: 12px;
 `;
 
@@ -578,7 +579,7 @@ function ProductDetail() {
                         : optionType === "sweetness"
                         ? "당도"
                         : optionType === "블렌딩 베이스"
-                        ? "블렌딩 베이스"
+                        ? "블렌�� 베이스"
                         : optionType === "화이트펄"
                         ? "펄"
                         : optionType === "치즈폼"
