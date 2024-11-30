@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/kdot-app/static/css/main.a6394a67.css",
-    "main.js": "/kdot-app/static/js/main.8d4e6775.js",
+    "main.js": "/kdot-app/static/js/main.e36f6a19.js",
     "index.html": "/kdot-app/index.html",
     "main.a6394a67.css.map": "/kdot-app/static/css/main.a6394a67.css.map",
-    "main.8d4e6775.js.map": "/kdot-app/static/js/main.8d4e6775.js.map"
+    "main.e36f6a19.js.map": "/kdot-app/static/js/main.e36f6a19.js.map"
   },
   "entrypoints": [
     "static/css/main.a6394a67.css",
-    "static/js/main.8d4e6775.js"
+    "static/js/main.e36f6a19.js"
   ]
 }
