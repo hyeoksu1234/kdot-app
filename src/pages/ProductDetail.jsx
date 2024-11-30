@@ -16,47 +16,49 @@ import {
 } from "../components/Icons";
 
 const ProductDetailContainer = styled.div`
-  padding: 0;
+  padding: 4rem 1rem 150px;
   max-width: 768px;
   margin: 0 auto;
-  padding-bottom: 150px;
 `;
 
-const TopHeader = styled.div`
+const TopHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  padding: 1rem;
   display: flex;
   align-items: center;
-  padding: 1rem;
-  background: white;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: box-shadow 0.3s ease;
+  gap: 1rem;
+  z-index: 1000;
   box-shadow: ${(props) =>
-    props.$scrolled ? "0 2px 4px rgba(0, 0, 0, 0.1)" : "none"};
+    props.$scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none"};
 `;
 
 const BackButton = styled.button`
-  background: transparent;
+  background: none;
   border: none;
   padding: 0.5rem;
   cursor: pointer;
-  margin-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
-    width: 20px;
-    height: 20px;
-    color: #333;
+    width: 24px;
+    height: 24px;
   }
 `;
 
 const PageTitle = styled.h1`
-  margin: 0;
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 600;
+  margin: 0;
 `;
 
 const ProductHeader = styled.div`
-  padding: 1.5rem 1rem 1rem;
+  padding: 1.5rem 0 1rem; // 좌우 패딩 제거 (이미 컨테이너에 있으므로)
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -204,7 +206,7 @@ const QuantityControl = styled.div`
 
 const FixedBottom = styled.div`
   position: fixed;
-  bottom: 4.5rem;
+  bottom: 3.8rem;
   left: 0;
   right: 0;
   background: white;
@@ -292,6 +294,7 @@ const ShowMoreButton = styled.button`
     background: #f5f5f5;
   }
 `;
+
 const OptionSelectButton = styled.button`
   display: flex;
   align-items: center;
@@ -325,7 +328,7 @@ const OptionSelectButton = styled.button`
 
   .option-value {
     font-size: 1rem;
-    color: #333;
+    color: #ff7b28;
     font-weight: 500;
   }
 
@@ -447,7 +450,7 @@ function ProductDetail() {
     if (!product?.options) return true;
 
     return Object.entries(product.options).every(([optionType, values]) => {
-      if (optionType === "화이트펄" || optionType === "치즈폼") return true;
+      if (optionType === "펄" || optionType === "치즈폼") return true;
       if (optionType === "ice" && customOptions.temperature === "뜨겁게")
         return true;
 
@@ -514,7 +517,7 @@ function ProductDetail() {
                     {optionType === "ice" && <IceIcon />}
                     {optionType === "sweetness" && <SweetnessIcon />}
                     {optionType === "블렌딩베이스" && <BlendingIcon />}
-                    {optionType === "화이트펄" && <PearlIcon />}
+                    {optionType === "펄" && <PearlIcon />}
                     {optionType === "치즈폼" && <CheeseIcon />}
                     {optionType === "탄산" && <SparklingIcon />}
                     {(optionType === "자스민그린티" ||
@@ -533,7 +536,7 @@ function ProductDetail() {
                         ? "당도"
                         : optionType === "블렌딩베이스"
                         ? "블렌딩 베이스"
-                        : optionType === "화이트펄"
+                        : optionType === "펄"
                         ? "펄"
                         : optionType === "치즈폼"
                         ? "치즈폼"
@@ -567,7 +570,7 @@ function ProductDetail() {
                         ? "당도"
                         : optionType === "블렌딩베이스"
                         ? "블렌딩 베이스"
-                        : optionType === "화이트펄"
+                        : optionType === "펄"
                         ? "펄"
                         : optionType === "치즈폼"
                         ? "치즈폼"

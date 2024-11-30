@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const FixedBottom = styled.div`
   position: fixed;
-  bottom: 4.5rem;
+  bottom: 4rem;
   left: 0;
   right: 0;
   background: white;
@@ -15,14 +15,14 @@ const FixedBottom = styled.div`
 `;
 
 const CartContainer = styled.div`
-  padding: 4rem 1rem 8rem;
+  padding: 4rem 1rem 10rem;
   max-width: 768px;
   margin: 0 auto;
 `;
 
 const CartItem = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding: 1rem;
   border-bottom: 1px solid #eee;
   margin-bottom: 1rem;
@@ -41,10 +41,29 @@ const ItemInfo = styled.div`
   h3 {
     margin: 0 0 0.5rem 0;
   }
-  p {
-    margin: 0;
+
+  .options {
     color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+
+    .option-line {
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
   }
+
+  .price {
+    margin-top: 0.5rem;
+    font-weight: 500;
+  }
+`;
+
+const ItemFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
 `;
 
 const RemoveButton = styled.button`
@@ -54,6 +73,7 @@ const RemoveButton = styled.button`
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 0.9rem;
 
   &:hover {
     background: #cc0000;
@@ -122,7 +142,8 @@ const TopHeader = styled.header`
   align-items: center;
   gap: 1rem;
   z-index: 1000;
-  box-shadow: ${props => props.$scrolled ? '0 2px 10px rgba(0, 0, 0, 0.1)' : 'none'};
+  box-shadow: ${(props) =>
+    props.$scrolled ? "0 2px 10px rgba(0, 0, 0, 0.1)" : "none"};
 `;
 
 const BackButton = styled.button`
@@ -153,8 +174,8 @@ function Cart() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const { cartItems, removeFromCart, updateCartItemQuantity } =
@@ -174,7 +195,12 @@ function Cart() {
     <CartContainer>
       <TopHeader $scrolled={isScrolled}>
         <BackButton onClick={() => navigate(-1)}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </BackButton>
@@ -190,27 +216,29 @@ function Cart() {
           />
           <ItemInfo>
             <h3>{item.name}</h3>
-            <p>
-              {Object.entries(item.customOptions).map(([key, value]) => (
-                <span key={key}>
-                  {key}: {value},{" "}
-                </span>
+            <div className="options">
+              {Object.entries(item.customOptions).map(([key, value], index) => (
+                <div key={index} className="option-line">
+                  {key}: {value}
+                </div>
               ))}
-            </p>
-            <QuantityControl>
-              <button onClick={() => handleQuantityChange(item.id, -1)}>
-                -
-              </button>
-              <span>{item.quantity}</span>
-              <button onClick={() => handleQuantityChange(item.id, 1)}>
-                +
-              </button>
-            </QuantityControl>
-            <p>{item.totalPrice.toLocaleString()}원</p>
+            </div>
+            <ItemFooter>
+              <QuantityControl>
+                <button onClick={() => handleQuantityChange(item.id, -1)}>
+                  -
+                </button>
+                <span>{item.quantity}</span>
+                <button onClick={() => handleQuantityChange(item.id, 1)}>
+                  +
+                </button>
+              </QuantityControl>
+              <RemoveButton onClick={() => removeFromCart(item.id)}>
+                삭제
+              </RemoveButton>
+            </ItemFooter>
+            <p className="price">{item.totalPrice.toLocaleString()}원</p>
           </ItemInfo>
-          <RemoveButton onClick={() => removeFromCart(item.id)}>
-            삭제
-          </RemoveButton>
         </CartItem>
       ))}
       <FixedBottom>

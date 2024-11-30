@@ -30,7 +30,7 @@ export const products = [
         ["자스민그린티", true],
         ["없이(카페인 FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄(추천)", true],
         ["흑당펄", false],
         ["알로에펄", false],
@@ -85,11 +85,11 @@ export const products = [
         ["매우적게", false],
       ],
       블렌딩베이스: [
-        ["망고", false],
+        ["망고(추천)", true],
         ["코코넛", false],
         ["베리", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", true],
         ["흑당펄", false],
         ["알로에펄", false],
@@ -142,7 +142,7 @@ export const products = [
         ["자스민그린티(추천)", true],
         ["얼그레이(FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄(추천)", true],
         ["흑당펄", false],
         ["알로에펄", false],
@@ -195,7 +195,7 @@ export const products = [
         ["제주 녹차(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄(추천)", true],
         ["흑당펄", false],
         ["알로에펄", false],
@@ -257,7 +257,7 @@ export const products = [
         ["민트차(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", false],
         ["흑당펄(추천)", true],
         ["알로에펄", false],
@@ -320,7 +320,7 @@ export const products = [
         ["오렌지(추천)", true],
         ["크랜베리", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", false],
         ["흑당펄", false],
         ["알로에펄(추천)", true],
@@ -373,11 +373,6 @@ export const products = [
         ["기본", true],
         ["적게", false],
         ["매우적게", false],
-      ],
-      화이트펄: [
-        ["코코넛펄", false],
-        ["흑당펄", false],
-        ["알로에펄(추천)", true],
       ],
       펄: [
         ["알로에펄(추천)", true],
@@ -433,7 +428,7 @@ export const products = [
         ["적게", false],
         ["매우적게", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", false],
         ["흑당펄", false],
         ["알로에펄(추천)", true],
@@ -495,7 +490,7 @@ export const products = [
         ["자스민그린티(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", false],
         ["흑당펄", false],
         ["알로에펄(추천)", true],
@@ -552,7 +547,7 @@ export const products = [
         ["얼그레이티(추천)", true],
         ["없이(카페인 FREE)", false],
       ],
-      화이트펄: [
+      펄: [
         ["코코넛펄", false],
         ["흑당펄", false],
         ["알로에펄(추천)", true],

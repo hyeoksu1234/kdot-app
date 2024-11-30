@@ -1,6 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { FaHome, FaCoffee, FaShoppingCart, FaEllipsisH } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
 
 const NavbarContainer = styled.nav`
   position: fixed;
@@ -20,54 +22,61 @@ const NavList = styled.ul`
   padding: 0.5rem 0;
 `;
 
-const NavItem = styled.li`
-  text-align: center;
-`;
-
-const NavLink = styled(Link)`
+const NavItem = styled(Link)`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 4px;
+  color: ${(props) => (props.$active ? "#FF7B28" : "#666")};
   text-decoration: none;
-  color: ${props => props.$active ? '#FF7B28' : '#666'};
-  font-size: 0.8rem;
-  gap: 0.3rem;
-  padding: 0.5rem;
+  font-size: 0.75rem;
 
   svg {
-    font-size: 1.3rem;
+    width: 24px;
+    height: 24px;
   }
+`;
+
+const CartBadge = styled.span`
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  background: #ff7b28;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 function Navbar() {
   const location = useLocation();
+  const { cartCount } = useContext(CartContext);
 
   return (
     <NavbarContainer>
       <NavList>
-        <NavItem>
-          <NavLink to="/" $active={location.pathname === "/"}>
-            <FaHome />
-            홈
-          </NavLink>
+        <NavItem to="/" $active={location.pathname === "/"}>
+          <FaHome />홈
         </NavItem>
-        <NavItem>
-          <NavLink to="/menu" $active={location.pathname === "/menu"}>
-            <FaCoffee />
-            메뉴
-          </NavLink>
+        <NavItem to="/menu" $active={location.pathname === "/menu"}>
+          <FaCoffee />
+          메뉴
         </NavItem>
-        <NavItem>
-          <NavLink to="/cart" $active={location.pathname === "/cart"}>
-            <FaShoppingCart />
-            장바구니
-          </NavLink>
+        <NavItem to="/cart" $active={location.pathname === "/cart"}>
+          <FaShoppingCart />
+          {cartCount > 0 && <CartBadge>{cartCount}</CartBadge>}
+          <span>장바구니</span>
         </NavItem>
-        <NavItem>
-          <NavLink to="/profile" $active={location.pathname === "/profile"}>
-            <FaEllipsisH />
-            더보기
-          </NavLink>
+        <NavItem to="/profile" $active={location.pathname === "/profile"}>
+          <FaEllipsisH />
+          더보기
         </NavItem>
       </NavList>
     </NavbarContainer>
