@@ -7,7 +7,8 @@ import ProductDetail from "./pages/ProductDetail";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
 import { CartProvider } from "./contexts/CartContext";
-import GlobalStyle from './styles/GlobalStyle';
+import GlobalStyle from "./styles/GlobalStyle";
+import Payment from "./pages/Payment";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/payment" element={<Payment />} />
           </Routes>
           <Navbar />
         </div>

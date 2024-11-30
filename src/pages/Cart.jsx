@@ -191,6 +191,15 @@ function Cart() {
     }
   };
 
+  const handleCheckout = () => {
+    navigate('/payment', { 
+      state: { 
+        items: cartItems,
+        totalAmount: total 
+      } 
+    });
+  };
+
   return (
     <CartContainer>
       <TopHeader $scrolled={isScrolled}>
@@ -243,7 +252,7 @@ function Cart() {
       ))}
       <FixedBottom>
         <TotalPrice>총 금액: {total.toLocaleString()}원</TotalPrice>
-        <CheckoutButton>주문하기</CheckoutButton>
+        <CheckoutButton onClick={handleCheckout}>주문하기</CheckoutButton>
       </FixedBottom>
     </CartContainer>
   );
