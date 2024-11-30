@@ -442,8 +442,26 @@ function ProductDetail() {
   };
 
   const handleCheckout = () => {
-    handleAddToCart();
-    navigate("/cart");
+    const basePrice =
+      product.price + (customOptions.size === "Large (+800원)" ? 800 : 0);
+    const totalPrice = basePrice * quantity;
+
+    const orderItem = {
+      id: product.id,
+      name: product.name,
+      price: basePrice,
+      image: product.image,
+      quantity: quantity,
+      customOptions: customOptions,
+      totalPrice: totalPrice,
+    };
+
+    navigate("/payment", {
+      state: {
+        items: [orderItem],
+        totalAmount: totalPrice,
+      },
+    });
   };
 
   const validateOptions = () => {
