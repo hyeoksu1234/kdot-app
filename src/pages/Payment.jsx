@@ -1,6 +1,7 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { CartContext } from "../contexts/CartContext";
 
 const PaymentContainer = styled.div`
   padding: 4rem 1rem 10rem;
@@ -75,13 +76,13 @@ const PaymentOption = styled.button`
   width: 100%;
   padding: 1rem;
   margin: 0.5rem 0;
-  border: 1px solid ${props => props.$selected ? '#ff7b28' : '#eee'};
-  background: ${props => props.$selected ? '#fff6f2' : 'white'};
+  border: 1px solid ${(props) => (props.$selected ? "#ff7b28" : "#eee")};
+  background: ${(props) => (props.$selected ? "#fff6f2" : "white")};
   border-radius: 12px;
   cursor: pointer;
   text-align: left;
   font-size: 1rem;
-  
+
   &:hover {
     border-color: #ff7b28;
     background: #fff6f2;
@@ -124,20 +125,29 @@ const PayButton = styled.button`
 function Payment() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { items, totalAmount } = location.state || { items: [], totalAmount: 0 };
-  const [selectedPayment, setSelectedPayment] = React.useState('card');
+  const { clearCart } = useContext(CartContext);
+  const { items, totalAmount } = location.state || {
+    items: [],
+    totalAmount: 0,
+  };
+  const [selectedPayment, setSelectedPayment] = React.useState("card");
 
   const handlePayment = () => {
-    // 결제 처리 로직 추가 예정
-    alert('결제가 완료되었습니다.');
-    navigate('/');
+    alert("결제가 완료되었습니다.");
+    clearCart();
+    navigate("/");
   };
 
   return (
     <PaymentContainer>
       <TopHeader>
         <BackButton onClick={() => navigate(-1)}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <path d="M15 18l-6-6 6-6" />
           </svg>
         </BackButton>
@@ -148,7 +158,9 @@ function Payment() {
         <SectionTitle>주문 내역</SectionTitle>
         {items.map((item, index) => (
           <OrderItem key={index}>
-            <span>{item.name} x {item.quantity}</span>
+            <span>
+              {item.name} x {item.quantity}
+            </span>
             <span>{item.totalPrice.toLocaleString()}원</span>
           </OrderItem>
         ))}
@@ -156,21 +168,21 @@ function Payment() {
 
       <PaymentMethods>
         <SectionTitle>결제 수단</SectionTitle>
-        <PaymentOption 
-          $selected={selectedPayment === 'card'}
-          onClick={() => setSelectedPayment('card')}
+        <PaymentOption
+          $selected={selectedPayment === "card"}
+          onClick={() => setSelectedPayment("card")}
         >
           신용/체크카드
         </PaymentOption>
-        <PaymentOption 
-          $selected={selectedPayment === 'kakao'}
-          onClick={() => setSelectedPayment('kakao')}
+        <PaymentOption
+          $selected={selectedPayment === "kakao"}
+          onClick={() => setSelectedPayment("kakao")}
         >
           카카오페이
         </PaymentOption>
-        <PaymentOption 
-          $selected={selectedPayment === 'naver'}
-          onClick={() => setSelectedPayment('naver')}
+        <PaymentOption
+          $selected={selectedPayment === "naver"}
+          onClick={() => setSelectedPayment("naver")}
         >
           네이버페이
         </PaymentOption>

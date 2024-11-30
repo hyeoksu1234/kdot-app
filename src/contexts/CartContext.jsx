@@ -47,6 +47,7 @@ export function CartProvider({ children }) {
 
   const clearCart = () => {
     setCartItems([]);
+    setCartCount(0);
   };
 
   const updateCartItemQuantity = (itemId, newQuantity) => {
