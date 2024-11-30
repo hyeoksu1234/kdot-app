@@ -218,7 +218,7 @@ function Home() {
             <div className="content">
               <h3>겨울 시즌 한정 메뉴</h3>
               <p>고소한 앙버터 송편과 상큼한 유자의 완벽한 만남</p>
-              <p className="date">2024.012.01 - 2025.01.31</p>
+              <p className="date">2024.12.01 - 2025.01.31</p>
             </div>
           </EventCard>
           <EventCard>
@@ -229,7 +229,7 @@ function Home() {
             <div className="content">
               <h3>K.Dot 멤버십 런칭</h3>
               <p>회원가입시 음료 무료 쿠폰 증정</p>
-              <p className="date">2024.05.01 - 2024.05.31</p>
+              <p className="date">2024.11.30 - 2024.12.31</p>
             </div>
           </EventCard>
         </EventGrid>
